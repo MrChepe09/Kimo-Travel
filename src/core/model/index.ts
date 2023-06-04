@@ -28,22 +28,4 @@ export enum STATUS_CODE_ERROR {
 
 export interface IAxiosHttpClient {
   get<TResponse>(path: string): Promise<TResponse>;
-  post<TRequest, TResponse>(
-    path: string,
-    object: TRequest,
-    config?: AxiosRequestConfig
-  ): Promise<TResponse>;
-  put<TRequest, TResponse>(
-    path: string,
-    object: TRequest,
-    config?: AxiosRequestConfig
-  ): Promise<TResponse>;
-  delete<TResponse>(
-    path: string,
-    config?: AxiosRequestConfig
-  ): Promise<TResponse>;
-}
-
-export class AxiosApiConfiguration {
-  accessToken?: string;
 }
