@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
@@ -10,7 +11,7 @@ const twc = {
   description:
     "text-base leading-5 font-bold text-center text-welcome plex-mono block mt-4 px-4 lg:px-[188px] ",
   img: "object-cover w-full h-full bg-[#D9D9D9]",
-  imgMobile: "object-cover w-full h-full bg-[#D9D9D9]",
+  imgMobile: "object-fill w-full h-full bg-[#D9D9D9]",
 };
 
 export type BannerProps = {
