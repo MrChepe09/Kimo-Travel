@@ -34,7 +34,7 @@ export const Category = ({
 }: CategoryProps) => {
   const { data } = useContext(AppContext);
   const { categories } = data;
-  const [isActive, setIsActive] = useState(CATEGORY.ADVENTURE);
+  const [isActive, setIsActive] = useState("" as CATEGORY);
   const filter =
     categories?.filter((d: CategoriesProps) => d.name === isActive) || [];
   const router = useRouter();
