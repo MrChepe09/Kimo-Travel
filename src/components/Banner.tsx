@@ -51,6 +51,10 @@ export const Banner = ({ image, heading, description }: BannerProps) => {
           unoptimized={true}
         />
       </div>
+      <div className={twc.headingContainer}>
+        <h1 className={twc.heading}>{heading ? heading : ""}</h1>
+        {description && <p className={twc.description}>{description}</p>}
+      </div>
     </div>
   );
 };
