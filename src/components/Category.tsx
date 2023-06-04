@@ -30,7 +30,7 @@ export const Category = ({
   isIconEnabled = true,
   className,
   classNameContainer,
-  isActivity = false,
+  isActivity = true,
 }: CategoryProps) => {
   const { data } = useContext(AppContext);
   const { categories } = data;
@@ -49,28 +49,35 @@ export const Category = ({
               className={cn(twc.category, {
                 "min-w-[150px]": path,
               })}
-              onClick={() => setIsActive(d.name as SetStateAction<CATEGORY>)}
+              onClick={() => {
+                if(isActive !== d.name){
+                  setIsActive(d.name as SetStateAction<CATEGORY>)
+                } else {
+                  setIsActive("" as SetStateAction<CATEGORY>)
+                }
+              }}
             >
               <p
                 className={cn(twc.categoryTitle, {
                   "w-full text-center": path,
                   "text-xl font-extrabold text-teal":
-                    path && isActive === d.name,
+                    isActive === d.name,
                 })}
               >
                 {d.name}
               </p>
               {isIconEnabled && <NextIcon />}
             </li>
+            {isActivity && isActive === d.name &&
+              <div style={{ backgroundColor: 'white', borderRadius: '10px', marginTop: '-20px' }}>
+              {filter[0]?.activities?.map((e: ActivitiesProps, i: number) => (
+                <div className="mt-4" key={i}>
+                  <li className={twc.category}>{e.title}</li>
+                </div>
+              ))}</div>}
           </div>
         ))}
       </div>
-      {isActivity &&
-        filter[0]?.activities?.map((e: ActivitiesProps, i: number) => (
-          <div className="mt-4" key={i}>
-            <li className={twc.category}>{e.title}</li>
-          </div>
-        ))}
     </div>
   );
 };
