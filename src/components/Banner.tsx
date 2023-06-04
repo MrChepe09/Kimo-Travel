@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const twc = {
   bannerContainer: "w-full relative banner-height overflow-x-hidden",
@@ -21,25 +21,34 @@ export type BannerProps = {
 export enum BANNER {
   HEADING = "Welcome to Hawaii",
   ALT = "homepage-icon",
-  IMAGE_PATH = "/Image.png",
+  MOBILE_IMAGE_PATH = "/mobileHead.png",
+  IMAGE_PATH="/Head.png",
 }
 
 export const Banner = ({ image, heading, description }: BannerProps) => {
+  const [screenSize, setScreenSize] = useState(1020);
+
+  useEffect(() => {
+    const updateDimension = () => {
+      setScreenSize(window.innerWidth);
+    }
+    window.addEventListener('resize', updateDimension);
+
+    return(() => {
+      window.removeEventListener('resize', updateDimension);
+    })
+  }, [screenSize])
   return (
     <div className={twc.bannerContainer}>
       <div className="h-full">
         <Image
           className={twc.img}
-          src={image ? image : BANNER.IMAGE_PATH}
+          src={image ? image : (screenSize <= 720 ? BANNER.MOBILE_IMAGE_PATH : BANNER.IMAGE_PATH)}
           alt={BANNER.ALT}
           width={100}
           height={100}
           unoptimized={true}
         />
-      </div>
-      <div className={twc.headingContainer}>
-        <h1 className={twc.heading}>{heading ? heading : BANNER.HEADING}</h1>
-        {description && <p className={twc.description}>{description}</p>}
       </div>
     </div>
   );
